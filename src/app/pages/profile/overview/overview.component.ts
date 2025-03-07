@@ -24,7 +24,7 @@ import { CommonModule } from "@angular/common"
       </div>
     </div>
   `,
-  styles: []
+  styles: [],
 })
 export class OverviewComponent {}
 

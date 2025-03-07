@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common"
 import { RouterLink } from "@angular/router"
 
 @Component({
-  selector: 'app-antique-detail',
+  selector: "app-antique-detail",
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
@@ -88,7 +88,7 @@ import { RouterLink } from "@angular/router"
         </div>
       </div>
     </div>
-  `
+  `,
 })
 export class AntiqueDetailComponent {
   antique = {

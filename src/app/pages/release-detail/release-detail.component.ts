@@ -1,4 +1,4 @@
-import { Component, type OnInit } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { ActivatedRoute, RouterLink } from "@angular/router"
 
@@ -128,7 +128,8 @@ export class ReleaseDetailComponent implements OnInit {
       id: 1,
       artist: "Pink Floyd",
       title: "Dark Side of the Moon",
-      imageUrl: "https://images.theconversation.com/files/512871/original/file-20230301-26-ryosag.jpg?ixlib=rb-4.1.0&rect=97%2C79%2C5799%2C5817&q=45&auto=format&w=926&fit=clip",
+      imageUrl:
+        "https://images.theconversation.com/files/512871/original/file-20230301-26-ryosag.jpg?ixlib=rb-4.1.0&rect=97%2C79%2C5799%2C5817&q=45&auto=format&w=926&fit=clip",
       label: "Harvest",
       catalogNumber: "SHVL 804",
       format: "Vinyl, LP, Album",

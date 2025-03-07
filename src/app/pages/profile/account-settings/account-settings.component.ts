@@ -66,7 +66,7 @@ import { FormsModule } from "@angular/forms"
       </form>
     </div>
   `,
-  styles: []
+  styles: [],
 })
 export class AccountSettingsComponent {}
 

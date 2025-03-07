@@ -57,5 +57,33 @@ export const routes: Routes = [
     path: "antiques/:id",
     component: AntiqueDetailComponent,
   },
+  {
+    path: "admin",
+    loadComponent: () => import("./pages/admin/admin.component").then((m) => m.AdminComponent),
+    children: [
+      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      {
+        path: "dashboard",
+        loadComponent: () => import("./pages/admin/dashboard/dashboard.component").then((m) => m.DashboardComponent),
+      },
+      {
+        path: "products",
+        loadComponent: () => import("./pages/admin/products/products.component").then((m) => m.ProductsComponent),
+      },
+      {
+        path: "orders",
+        loadComponent: () => import("./pages/admin/orders/orders.component").then((m) => m.OrdersComponent),
+      },
+      {
+        path: "customers",
+        loadComponent: () => import("./pages/admin/customers/customers.component").then((m) => m.CustomersComponent),
+      },
+      {
+        path: "analytics",
+        loadComponent: () => import("./pages/admin/analytics/analytics.component").then((m) => m.AnalyticsComponent),
+      },
+    ],
+  },
+  { path: "**", redirectTo: "" },
 ]
 

@@ -5,12 +5,7 @@ import { RouterModule, RouterLink, RouterLinkActive } from "@angular/router"
 @Component({
   selector: "app-profile",
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    RouterLink,
-    RouterLinkActive
-  ],
+  imports: [CommonModule, RouterModule, RouterLink, RouterLinkActive],
   template: `
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-3xl font-bold mb-8 dark:text-white">My Profile</h1>
@@ -61,7 +56,7 @@ import { RouterModule, RouterLink, RouterLinkActive } from "@angular/router"
       </div>
     </div>
   `,
-  styles: []
+  styles: [],
 })
 export class ProfileComponent {}
 

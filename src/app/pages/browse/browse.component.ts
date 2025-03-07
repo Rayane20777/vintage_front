@@ -196,12 +196,14 @@ export class BrowseComponent {
       id: 1,
       artist: "Pink Floyd",
       title: "Dark Side of the Moon",
-      imageUrl: "https://images.theconversation.com/files/512871/original/file-20230301-26-ryosag.jpg?ixlib=rb-4.1.0&rect=97%2C79%2C5799%2C5817&q=45&auto=format&w=926&fit=clip",
+      imageUrl:
+        "https://images.theconversation.com/files/512871/original/file-20230301-26-ryosag.jpg?ixlib=rb-4.1.0&rect=97%2C79%2C5799%2C5817&q=45&auto=format&w=926&fit=clip",
       label: "Harvest",
       catalogNumber: "SHVL 804",
       mediaCondition: "Near Mint (NM or M-)",
       sleeveCondition: "Very Good Plus (VG+)",
-      description: "Original UK pressing from 1973. The vinyl is in excellent condition with minimal surface noise. The sleeve shows some light wear on the edges but overall in great condition.",
+      description:
+        "Original UK pressing from 1973. The vinyl is in excellent condition with minimal surface noise. The sleeve shows some light wear on the edges but overall in great condition.",
       have: 12453,
       want: 8765,
       rating: 4.8,
@@ -211,18 +213,20 @@ export class BrowseComponent {
       category: "Rock",
       shipsFrom: "United Kingdom",
       shipping: 4.99,
-      totalEuros: 154.98
+      totalEuros: 154.98,
     },
     {
       id: 2,
       artist: "Miles Davis",
       title: "Kind of Blue",
-      imageUrl: "https://cdn-p.smehost.net/sites/c5d2b1a28fd246bfafed3b8dbafc1352/wp-content/uploads/2021/05/cover-45.jpg",
+      imageUrl:
+        "https://cdn-p.smehost.net/sites/c5d2b1a28fd246bfafed3b8dbafc1352/wp-content/uploads/2021/05/cover-45.jpg",
       label: "Columbia",
       catalogNumber: "CS 8163",
       mediaCondition: "Mint (M)",
       sleeveCondition: "Mint (M)",
-      description: "Original 1959 pressing in pristine condition. One of the most influential jazz albums ever recorded, featuring the legendary sextet with John Coltrane and Bill Evans.",
+      description:
+        "Original 1959 pressing in pristine condition. One of the most influential jazz albums ever recorded, featuring the legendary sextet with John Coltrane and Bill Evans.",
       have: 8562,
       want: 6543,
       rating: 4.9,
@@ -232,7 +236,7 @@ export class BrowseComponent {
       category: "Jazz",
       shipsFrom: "United States",
       shipping: 5.99,
-      totalEuros: 205.98
+      totalEuros: 205.98,
     },
     {
       id: 3,
@@ -243,7 +247,8 @@ export class BrowseComponent {
       catalogNumber: "PCS 7088",
       mediaCondition: "Very Good Plus (VG+)",
       sleeveCondition: "Very Good (VG)",
-      description: "Original UK pressing from 1969. The vinyl has some light surface marks but plays well. The sleeve has some ring wear and edge wear but is still presentable.",
+      description:
+        "Original UK pressing from 1969. The vinyl has some light surface marks but plays well. The sleeve has some ring wear and edge wear but is still presentable.",
       have: 15678,
       want: 9876,
       rating: 4.7,
@@ -253,7 +258,7 @@ export class BrowseComponent {
       category: "Rock",
       shipsFrom: "United Kingdom",
       shipping: 4.99,
-      totalEuros: 94.98
+      totalEuros: 94.98,
     },
     {
       id: 4,
@@ -264,7 +269,8 @@ export class BrowseComponent {
       catalogNumber: "88883716861",
       mediaCondition: "Near Mint (NM or M-)",
       sleeveCondition: "Near Mint (NM or M-)",
-      description: "Limited edition 180g pressing from 2013. The vinyl is in excellent condition with no surface noise. The sleeve is pristine with no wear.",
+      description:
+        "Limited edition 180g pressing from 2013. The vinyl is in excellent condition with no surface noise. The sleeve is pristine with no wear.",
       have: 5432,
       want: 4321,
       rating: 4.6,
@@ -274,8 +280,8 @@ export class BrowseComponent {
       category: "Electronic",
       shipsFrom: "France",
       shipping: 6.99,
-      totalEuros: 86.98
-    }
+      totalEuros: 86.98,
+    },
   ]
 
   filteredRecords = [...this.vinylRecords]
