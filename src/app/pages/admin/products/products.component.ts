@@ -2,22 +2,53 @@ import { Component } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { RouterLink, RouterLinkActive } from "@angular/router"
+import { AddProductFormComponent } from "../components/add-product-form/add-product-form.component"
+import { EditProductFormComponent } from "../components/edit-product-form/edit-product-form.component"
+import { ModalComponent } from "../../../components/modal/modal.component"
 
 interface Product {
   id: number
   name: string
-  artist: string
-  category: string
+  description: string
   price: number
-  boughtPrice: number // Add bought price
+  boughtPrice: number
   status: string
   type: string
+  year: number
+  imageUrl?: string
+  artist?: string
+  category?: string
+
+  // Vinyl specific fields
+  artists?: string[]
+  genres?: string[]
+  styles?: string[]
+  format?: string[]
+  discogsId?: number
+
+  // Equipment specific fields
+  model?: string
+  equipmentCondition?: string
+  material?: string
+  origin?: string
+
+  // Antique specific fields
+  typeId?: string
+  condition?: string
 }
 
 @Component({
   selector: "app-products",
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    RouterLinkActive,
+    AddProductFormComponent,
+    EditProductFormComponent,
+    ModalComponent,
+  ],
   template: `
     <div class="space-y-6">
       <!-- Header -->
@@ -27,7 +58,7 @@ interface Product {
           <p class="text-gray-500 mt-1">Manage your inventory of vinyl records, antiques, and equipment</p>
         </div>
         <div class="mt-4 md:mt-0">
-          <button class="bg-teal hover:bg-teal/90 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+          <button (click)="showAddForm()" class="bg-teal hover:bg-teal/90 text-white px-4 py-2 rounded-lg flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
@@ -35,6 +66,16 @@ interface Product {
           </button>
         </div>
       </div>
+
+      <!-- Add Product Modal -->
+      <app-modal [isOpen]="showAddProductForm" (close)="closeAddForm()" title="Add New Product">
+        <app-add-product-form (formSubmit)="onAddProduct($event)" (formCancel)="closeAddForm()"></app-add-product-form>
+      </app-modal>
+
+      <!-- Edit Product Modal -->
+      <app-modal [isOpen]="showEditProductForm" (close)="closeEditForm()" title="Edit Product">
+        <app-edit-product-form *ngIf="currentProduct" [product]="currentProduct" (formSubmit)="onEditProduct($event)" (formCancel)="closeEditForm()"></app-edit-product-form>
+      </app-modal>
 
       <!-- Product Type Navigation -->
       <div class="bg-white rounded-lg shadow-sm p-4">
@@ -219,8 +260,8 @@ interface Product {
                     </span>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <button class="text-teal hover:text-teal/80 mr-3">Edit</button>
-                    <button class="text-red-600 hover:text-red-800">Delete</button>
+                    <button (click)="editProduct(product)" class="text-teal hover:text-teal/80 mr-3">Edit</button>
+                    <button (click)="deleteProduct(product.id)" class="text-red-600 hover:text-red-800">Delete</button>
                   </td>
                 </tr>
               }
@@ -281,106 +322,187 @@ export class ProductsComponent {
     {
       id: 1,
       name: "Dark Side of the Moon",
+      description: "Iconic Pink Floyd album from 1973",
       artist: "Pink Floyd",
       category: "Rock",
       price: 29.99,
       boughtPrice: 15.0,
       status: "Available",
       type: "vinyl",
+      year: 1973
     },
     {
       id: 2,
       name: "Kind of Blue",
+      description: "Legendary jazz album by Miles Davis",
       artist: "Miles Davis",
       category: "Jazz",
       price: 24.99,
       boughtPrice: 12.5,
       status: "Available",
       type: "vinyl",
+      year: 1959
     },
     {
       id: 3,
       name: "Abbey Road",
+      description: "The Beatles' iconic final album",
       artist: "The Beatles",
       category: "Rock",
       price: 27.99,
       boughtPrice: 14.0,
       status: "Available",
       type: "vinyl",
+      year: 1969
     },
     {
       id: 4,
       name: "Thriller",
+      description: "Best-selling album of all time",
       artist: "Michael Jackson",
       category: "Pop",
       price: 22.99,
       boughtPrice: 11.5,
       status: "Sold Out",
       type: "vinyl",
+      year: 1982
     },
     {
       id: 5,
       name: "Back in Black",
+      description: "Classic AC/DC album",
       artist: "AC/DC",
       category: "Rock",
       price: 25.99,
       boughtPrice: 13.0,
       status: "Available",
       type: "vinyl",
+      year: 1980
     },
     {
       id: 6,
       name: "Vintage Clock",
+      description: "Beautiful antique wall clock from the Victorian era",
       artist: "N/A",
       category: "Antique",
       price: 299.99,
       boughtPrice: 150.0,
       status: "Available",
       type: "antique",
+      year: 1890
     },
     {
       id: 7,
       name: "Art Deco Lamp",
+      description: "Elegant Art Deco table lamp from the 1920s",
       artist: "N/A",
       category: "Antique",
       price: 450.0,
       boughtPrice: 225.0,
       status: "Available",
       type: "antique",
+      year: 1925
     },
     {
       id: 8,
       name: "Tube Amplifier",
+      description: "High-end Marshall tube amplifier",
       artist: "Marshall",
       category: "Equipment",
       price: 899.99,
       boughtPrice: 450.0,
       status: "Available",
       type: "equipment",
+      year: 2020
     },
     {
       id: 9,
       name: "Vintage Turntable",
+      description: "Professional Technics turntable in excellent condition",
       artist: "Technics",
       category: "Equipment",
       price: 1299.99,
       boughtPrice: 650.0,
       status: "Available",
       type: "equipment",
+      year: 1985
     },
     {
       id: 10,
       name: "Professional Microphone",
+      description: "High-quality Shure microphone for studio recording",
       artist: "Shure",
       category: "Equipment",
       price: 249.99,
       boughtPrice: 125.0,
       status: "Sold Out",
       type: "equipment",
+      year: 2021
     },
   ]
 
   filteredProducts: Product[] = [...this.products]
+
+  showAddProductForm = false
+  showEditProductForm = false
+  currentProduct: Product | null = null
+
+  showAddForm() {
+    this.showAddProductForm = true
+  }
+
+  closeAddForm() {
+    this.showAddProductForm = false
+  }
+
+  editProduct(product: Product) {
+    this.currentProduct = { ...product }
+    this.showEditProductForm = true
+  }
+
+  closeEditForm() {
+    this.showEditProductForm = false
+    this.currentProduct = null
+  }
+
+  onAddProduct(formProduct: Product) {
+    // Convert form product to our product format
+    const product: Product = {
+      ...formProduct,  // Copy all fields first
+      // Then override specific fields
+      id: this.products.length + 1,
+      artist: formProduct.artists?.[0] || "N/A",
+      category: formProduct.type === "vinyl" ? (formProduct.genres?.[0] || "Unknown") : formProduct.type,
+      type: formProduct.type.toLowerCase()
+    }
+    this.products.push(product)
+    this.closeAddForm()
+    this.applyFilters()
+  }
+
+  onEditProduct(formProduct: Product) {
+    const index = this.products.findIndex((p) => p.id === formProduct.id)
+    if (index !== -1) {
+      // Convert form product to our product format
+      const product: Product = {
+        ...formProduct,  // Copy all fields first
+        // Then override specific fields
+        artist: formProduct.artists?.[0] || "N/A",
+        category: formProduct.type === "vinyl" ? (formProduct.genres?.[0] || "Unknown") : formProduct.type,
+        type: formProduct.type.toLowerCase()
+      }
+      this.products[index] = product
+    }
+    this.closeEditForm()
+    this.applyFilters()
+  }
+
+  deleteProduct(id: number) {
+    if (confirm("Are you sure you want to delete this product?")) {
+      this.products = this.products.filter((p) => p.id !== id)
+      this.applyFilters()
+    }
+  }
 
   setProductType(type: string) {
     this.selectedProductType = type
